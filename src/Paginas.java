@@ -2,10 +2,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Paginas {
-    public static List<Pagina> paginas;
+    public static List<Pagina> paginas = new ArrayList<Pagina>();
+
 
     public static void criarPaginas(int quantidade, int tamanho ) {
-        List<Pagina> paginas = new ArrayList<Pagina>();
         int endereco = 0;
         for(int i = 1; i <= quantidade; i++) {
             List<Integer> enderecos = new ArrayList<Integer>();
@@ -16,7 +16,6 @@ public class Paginas {
             paginas.add(new Pagina("Página " + i, tamanho, enderecos));
             enderecos.clear();
         }
-        paginas = paginas;
     }
 
     public static List<Pagina> getPaginas() {
