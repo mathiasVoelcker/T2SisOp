@@ -4,13 +4,22 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MyThread extends Thread{
-    private int probabilidadeZero = 90;
-    private int probabilidadeUm = 5;
-    private int probabilidadeDois = 5;
+
+    // Probabilidade em % de cada acao
+    private int probabilidadeAcesso = 90;
+    private int probabilidadeAlocacao = 5;
+    private int probabilidadeFinalizar = 5;
 
     private String nome;
     private int tamanho;
     private List<Integer> enderecos;
+
+    /*
+     * Cada processo possui um tamanho, que é o espaço que ele ocupa na memória, ou o número de enderecos das páginas que ele ocupa
+     * Cada processo possui uma lista de endereços, que são inicializados uma vez que este é alocado a memória.
+     * Ao alocar 15 endereços na memória, e a listagem de enderecos do processo estiver vazia,
+     * os endereços serão listados de 0 a 14, independente da página em que foram alocados.
+     */
 
     public MyThread(String nome, int tamanho) {
         this.nome = nome;
@@ -26,17 +35,16 @@ public class MyThread extends Thread{
         List<Pagina> paginas = Paginas.getPaginas();
         while(n != 2) {
             int aux = ThreadLocalRandom.current().nextInt(1, 101);
-            if(aux < probabilidadeZero) {
-                --probabilidadeZero;
-                ++probabilidadeDois;
-                n = ThreadLocalRandom.current().nextInt(1, s);
+            if(aux < probabilidadeAcesso) {
+                --probabilidadeAcesso;
+                ++probabilidadeFinalizar;
+                n = ThreadLocalRandom.current().nextInt(0, s);
 
-                int enderecoAcessar = ThreadLocalRandom.current().nextInt(0, Paginas.numTotalEnderecos);
-//                System.out.println("thread " + nome + " deu 0");
-            } else if (aux < probabilidadeZero + probabilidadeUm) {
+                int enderecoAcessar = ThreadLocalRandom.current().nextInt(0, 20);
+                GerenteDeMemoria.acessarEndereco(this, enderecoAcessar);
+            } else if (aux < probabilidadeAcesso + probabilidadeAlocacao) {
                 if(s/5 < 1) n = 2;
-                else n = ThreadLocalRandom.current().nextInt(2, s/5);
-//                System.out.println("thread " + nome + " deu 1");
+                else n = ThreadLocalRandom.current().nextInt(0, s/5);
             } else break;
         }
         System.out.println("thread " + nome + " finalizada");

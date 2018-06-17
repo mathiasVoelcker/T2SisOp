@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,16 +9,16 @@ public class GerenteDeMemoria {
         int quantidadeJaAlocada = 0;
         List<Integer> paginasASerAlocadas = new ArrayList<Integer>();
         // para cada página
-        for (Pagina pagina: Paginas.getPaginas()) {
+        for (Pagina pagina : Paginas.getPaginas()) {
             // e se nessa página tiver apenas endereços vazios ou endereços com o mesmo processo alocado
-            if(pagina.getEnderecos()
+            if (pagina.getEnderecos()
                     .stream()
                     .allMatch(e -> e.getProcessoAlocado() == null
                             || e.getProcessoAlocado().getNome().equals(processo.getNome())
-                            )) {
+                    )) {
 //                    alocar processo nos endereços disponíveis
-                for (Endereco endereco: pagina.getEnderecos()) {
-                    if(endereco.getProcessoAlocado() == null) {
+                for (Endereco endereco : pagina.getEnderecos()) {
+                    if (endereco.getProcessoAlocado() == null) {
                         paginasASerAlocadas.add(pagina.getNumero());
                         quantidadeJaAlocada++;
                     }
@@ -33,12 +34,11 @@ public class GerenteDeMemoria {
         System.out.println("Não há espaço na memória");
     }
 
-    public static synchronized void adicionarProcessoAEnderecos(List<Integer> paginasASeremAlocadas, int totalEnderecos, MyThread processo) {
+    public static void adicionarProcessoAEnderecos(List<Integer> paginasASeremAlocadas, int totalEnderecos, MyThread processo) {
         int count = 0;
-        int tamanhoPagina = Paginas.getPagina(0).getTamanho();
-        for(int numPagina : paginasASeremAlocadas) {
-            for(int i = 0; i < tamanhoPagina; i++) {
-                if(count == totalEnderecos) {
+        for (int numPagina : paginasASeremAlocadas) {
+            for (int i = 0; i < Paginas.getPaginas().get(0).getTamanho(); i++) {
+                if (count == totalEnderecos) {
                     List<Pagina> paginas = Paginas.getPaginas();
                     return;
                 }
@@ -53,19 +53,19 @@ public class GerenteDeMemoria {
         }
     }
 
-    public static void acessarEndereco(MyThread processo, int enderecoProcesso) {
-        if(processo.getTamanho() >= enderecoProcesso)
+    public static synchronized void acessarEndereco(MyThread processo, int enderecoProcesso) {
+        if (processo.getTamanho() <= enderecoProcesso)
             System.out.println("erro de acesso à página");
         else {
-            // busca a página em que enderecoProcesso se encontra
-            Pagina pagina = Paginas.getPaginas()
+            //encontrar pagina que possui o enderecoDoProcesso e o processo desejado
+            List<Pagina> paginas = Paginas.getPaginas()
                     .stream()
-                    .filter( p -> p.getEnderecos()
+                    .filter(p -> p.getEnderecos()
                             .stream()
-                            .anyMatch( e -> e.getEnderecoDoProcesso() == enderecoProcesso))
-                    .findFirst()
-                    .get();
-            System.out.println("Acessar o endereco " + enderecoProcesso + " do " + processo.getNome() + " - página " + pagina.getNumero());
+                            .anyMatch(e -> e.getEnderecoDoProcesso() == enderecoProcesso
+                                    && e.getProcessoAlocado() != null
+                                    && e.getProcessoAlocado().getNome().equals(processo.getNome()))).collect(Collectors.toList());
+            System.out.println("Acessar o endereco " + enderecoProcesso + " do " + processo.getNome() + " - página " + paginas.get(0).getNumero());
         }
     }
 }

@@ -1,4 +1,17 @@
 public class Endereco {
+
+    /*
+     * Esta classe é usada para representar o endereço da página
+     * considerando como exemplo 8 páginas com 8 endereços:
+        * enderecoFisico vai de 0 a 7 na pagina 0
+        * enderecoFisico vai de 8 a 15 na página 1
+        * e assim continua até o enderecoFísico 63 na página 7
+        *
+        * enderecoDoProcesso é definido pelo processo que foi alocado para este endereço
+        * cada processo possui uma lista de endereços que são enumerados de 0 a n
+        * este número é salvo na variável enderecoDoProcesso
+     */
+
     private int enderecoFisico;
     private MyThread processoAlocado;
     private int enderecoDoProcesso;
