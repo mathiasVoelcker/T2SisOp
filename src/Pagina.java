@@ -1,20 +1,44 @@
+import javax.print.attribute.standard.MediaSize;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Pagina {
 
-    private String nome;
+    private int numero;
     private int tamanho;
-    private List<Integer> enderecos;
-    private boolean ocupada;
+    private List<Endereco> enderecos;
 
-    public Pagina(String nome, int tamanho, List<Integer> enderecos) {
-        this.nome = nome;
+
+    public Pagina(int numero, int tamanho, List<Endereco> enderecos) {
+        this.numero = numero;
         this.tamanho = tamanho;
-        this.enderecos = new ArrayList<Integer>();
-        this.ocupada = false;
-        for (int end: enderecos) {
+        this.enderecos = new ArrayList<Endereco>();
+        for (Endereco end: enderecos) {
             this.enderecos.add(end);
         }
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public int getTamanho() {
+        return tamanho;
+    }
+
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public void setTamanho(int tamanho) {
+        this.tamanho = tamanho;
+    }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
     }
 }
