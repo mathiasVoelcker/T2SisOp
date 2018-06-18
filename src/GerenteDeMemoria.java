@@ -34,23 +34,36 @@ public class GerenteDeMemoria {
         System.out.println("Não há espaço na memória");
     }
 
-    public static void adicionarProcessoAEnderecos(List<Integer> paginasASeremAlocadas, int totalEnderecos, MyThread processo) {
-        int count = 0;
-        for (int numPagina : paginasASeremAlocadas) {
+    public static synchronized void adicionarProcessoAEnderecos(List<Integer> paginasAlocadas, int totalEnderecos, MyThread processo) {
+        int tamanhoAnteriorProcesso = processo.getEnderecos().size();
+        int count = tamanhoAnteriorProcesso;
+        List<Integer> enderecosFisicosAlocados = new ArrayList<Integer>(); //lista criada para auxiliar a impressão de endereços físicos no final do método
+        outerbreak:
+        for (int numPagina : paginasAlocadas) {
             for (int i = 0; i < Paginas.getPaginas().get(0).getTamanho(); i++) {
-                if (count == totalEnderecos) {
+                if (count == totalEnderecos + tamanhoAnteriorProcesso) {
                     List<Pagina> paginas = Paginas.getPaginas();
-                    return;
+                    break;
                 }
+
                 Endereco end = Paginas.getPaginas()
                         .get(numPagina)
                         .getEnderecos()
                         .get(i);
-                end.setProcessoAlocado(processo);
-                end.setEnderecoDoProcesso(count);
-                count++;
+                if(end.getProcessoAlocado() == null) {
+                    end.setProcessoAlocado(processo);
+                    enderecosFisicosAlocados.add(end.getEnderecoFisico());
+                    processo.getEnderecos().add(count);
+                    end.setEnderecoDoProcesso(count);
+                    count++;
+                }
             }
         }
+        System.out.print("Aloca " + paginasAlocadas.size() + " páginas para " + processo.getNome());
+        System.out.print(" - endereços de " + tamanhoAnteriorProcesso + " a " + (processo.getEnderecos().size() - 1));
+        System.out.print(" - end físicos de " + enderecosFisicosAlocados.get(0) + " a " + enderecosFisicosAlocados.get(enderecosFisicosAlocados.size() - 1));
+
+        System.out.println(" - páginas " + paginasAlocadas.stream().map(p -> p.toString()).collect(Collectors.joining(", ")));
     }
 
     public static synchronized void acessarEndereco(MyThread processo, int enderecoProcesso) {

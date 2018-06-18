@@ -6,8 +6,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class MyThread extends Thread{
 
     // Probabilidade em % de cada acao
-    private int probabilidadeAcesso = 90;
-    private int probabilidadeAlocacao = 5;
+    private int probabilidadeAcesso = 70;
+    private int probabilidadeAlocacao = 25;
     private int probabilidadeFinalizar = 5;
 
     private String nome;
@@ -32,17 +32,26 @@ public class MyThread extends Thread{
         int s = gerador.nextInt(100);
         int n = 0;
         GerenteDeMemoria.alocarProcesso(this, this.tamanho);
+        System.out.println("C " + this.nome + " " + this.tamanho);
         List<Pagina> paginas = Paginas.getPaginas();
         while(n != 2) {
+            try {
+                Thread.currentThread().sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             int aux = ThreadLocalRandom.current().nextInt(1, 101);
             if(aux < probabilidadeAcesso) {
                 --probabilidadeAcesso;
                 ++probabilidadeFinalizar;
                 n = ThreadLocalRandom.current().nextInt(0, s);
-
                 int enderecoAcessar = ThreadLocalRandom.current().nextInt(0, 20);
                 GerenteDeMemoria.acessarEndereco(this, enderecoAcessar);
             } else if (aux < probabilidadeAcesso + probabilidadeAlocacao) {
+                int tamanhoNovaMemoria = ThreadLocalRandom.current().nextInt(5, 10);
+                System.out.println("M " + this.nome + " " + tamanhoNovaMemoria);
+                System.out.println("tentar alocar mais " + tamanhoNovaMemoria + " a " + this.nome);
+                GerenteDeMemoria.alocarProcesso(this, tamanhoNovaMemoria);
                 if(s/5 < 1) n = 2;
                 else n = ThreadLocalRandom.current().nextInt(0, s/5);
             } else break;
