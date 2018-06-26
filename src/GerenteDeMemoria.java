@@ -170,6 +170,10 @@ public class GerenteDeMemoria {
         if(paginas.size() == 0)
             System.out.println("Processo Não Encontrado");
         else {
+            for (Endereco endereco: Disco.getPagina(paginas.get(0).getNumero()).getEnderecos()) {
+                endereco.setProcessoAlocado(null);
+                endereco.setEnderecoDoProcesso(0);
+            }
             trocarProcessosMemoriaLRU(1);
             int tamanhoAlocacao = paginas.get(0).getEnderecos()
                     .stream()

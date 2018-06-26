@@ -17,12 +17,12 @@ public class main {
      	Scanner in = new Scanner(System.in);
     	
     	System.out.println("Modo de execuução:");
-//    	String modo = in.nextLine();
+    	String modo = in.nextLine();
 
 //    	arquivo("e0");
-    	aleatorio();
+//    	aleatorio();
 
-    	/*
+
     	switch(modo.toUpperCase()) {
     		case "ALEATORIO":
     			aleatorio();
@@ -36,7 +36,7 @@ public class main {
     			System.out.println("Opção inválida!");
     			break;
     	}
-    	*/
+
 
     }
 
