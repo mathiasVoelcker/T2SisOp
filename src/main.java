@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class main {
 
     public static void main(String[] args) {
-    	
+
      	Scanner in = new Scanner(System.in);
     	
     	System.out.println("Modo de execuução:");
@@ -37,7 +37,8 @@ public class main {
     }
 
     private static void aleatorio() {
-    	int TAMANHO_PAGINAS = 8;
+        OrdemExecucao.ordemExecucao = 0;
+        int TAMANHO_PAGINAS = 8;
         Paginas.criarPaginas(8, TAMANHO_PAGINAS);
         Disco.criarPaginas(2, TAMANHO_PAGINAS);
         List<Pagina> paginas = Paginas.getPaginas();

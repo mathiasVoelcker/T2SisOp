@@ -7,7 +7,7 @@ public class Pagina {
     private int numero;
     private int tamanho;
     private List<Endereco> enderecos;
-
+    private int ordemExecucao;
 
     public Pagina(int numero, int tamanho, List<Endereco> enderecos) {
         this.numero = numero;
@@ -40,5 +40,20 @@ public class Pagina {
 
     public void setEnderecos(List<Endereco> enderecos) {
         this.enderecos = enderecos;
+    }
+
+    public int getOrdemExecucao() {
+        return ordemExecucao;
+    }
+
+    public void setOrdemExecucao(int ordemExecucao) {
+        this.ordemExecucao = ordemExecucao;
+    }
+
+    public void esvaziar() {
+        for (int i = 0; i < enderecos.size(); i++) {
+            enderecos.get(i).setProcessoAlocado(null);
+            enderecos.get(i).setEnderecoDoProcesso(0);
+        }
     }
 }
