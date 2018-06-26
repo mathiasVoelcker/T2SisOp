@@ -71,4 +71,8 @@ public class MyThread extends Thread{
     public List<Integer> getEnderecos() {
         return enderecos;
     }
+
+    public void setTamanho(int tamanho) {
+        this.tamanho = tamanho;
+    }
 }

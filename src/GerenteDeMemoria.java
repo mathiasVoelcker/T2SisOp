@@ -111,6 +111,7 @@ public class GerenteDeMemoria {
             OrdemExecucao.aumentarOrdemExecucao();
             Paginas.getPagina(numPagina).setOrdemExecucao(OrdemExecucao.ordemExecucao);
         }
+
         System.out.print("Aloca " + paginasAlocadas.size() + " páginas para " + processo.getNome());
         System.out.print(" - endereços de " + tamanhoAnteriorProcesso + " a " + (processo.getEnderecos().size() - 1));
         System.out.print(" - end físicos de " + enderecosFisicosAlocados.get(0) + " a " + enderecosFisicosAlocados.get(enderecosFisicosAlocados.size() - 1));
@@ -118,8 +119,8 @@ public class GerenteDeMemoria {
     }
 
     public static synchronized void acessarEndereco(MyThread processo, int enderecoProcesso) {
-        if (processo.getTamanho() <= enderecoProcesso)
-            System.out.println("erro de acesso à página");
+        if (processo.getEnderecos().size() <= enderecoProcesso)
+            System.out.println("erro de acesso à página p: " + processo.getNome() + " e: " + enderecoProcesso);
         else {
             //encontrar pagina que possui o enderecoDoProcesso e o processo desejado
             List<Pagina> paginas = Paginas.getPaginas()

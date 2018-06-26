@@ -13,6 +13,7 @@ public class MyThreadManual extends MyThread{
     }
 
     public void run() {
+//    	System.out.print("Criando processo " + getNome());
     	GerenteDeMemoria.alocarProcesso(this, this.getTamanho(), false);
     	
     	for (String acao : acoes) {
