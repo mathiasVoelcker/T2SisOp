@@ -3,6 +3,7 @@ import com.sun.tools.corba.se.idl.constExpr.Or;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class GerenteDeMemoria {
@@ -41,7 +42,10 @@ public class GerenteDeMemoria {
         if(Disco.numPaginasVazias() < numPaginas) {
             System.out.println("Não há mais espaco na memória");
         } else {
-            trocarProcessosMemoriaLRU(numPaginas);
+            if (Algoritmo.algoritmo.equalsIgnoreCase("lru"))
+                trocarProcessosMemoriaLRU(numPaginas);
+            else
+                trocarProcessosMemoriaAleatorio(numPaginas);
             alocarProcesso(processo, tamanhoAlocacao, true);
         }
     }
@@ -80,6 +84,18 @@ public class GerenteDeMemoria {
             alocarPaginaADisco(paginaLRU);
             OrdemExecucao.aumentarOrdemExecucao();
             paginaLRU.setOrdemExecucao(OrdemExecucao.ordemExecucao);
+        }
+    }
+
+    private synchronized static void trocarProcessosMemoriaAleatorio(int numPaginas) {
+        List<Pagina> paginas = Paginas.getPaginas();
+        for (int i = 0; i < numPaginas; i++) {
+            Pagina paginaAleatoria = null;
+            int numPagina = ThreadLocalRandom.current().nextInt(0, Paginas.getQuantidadePaginas() - 1);
+            System.out.println("Sai a página " + numPagina);
+            alocarPaginaADisco(Paginas.getPagina(numPagina));
+            OrdemExecucao.aumentarOrdemExecucao();
+            Paginas.getPagina(numPagina).setOrdemExecucao(OrdemExecucao.ordemExecucao);
         }
     }
 

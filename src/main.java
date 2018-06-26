@@ -53,7 +53,7 @@ public class main {
     		int count = 0;
     		boolean isPagCriadas = false;
     		String modo = "";
-    		String algoritmo = "";
+    		Algoritmo.algoritmo = "";
     		int tamPag = 0;
     		int tamMem = 0;
     		int tamArmaz = 0;
@@ -90,7 +90,7 @@ public class main {
             	} else if (count == 0) {
             		modo = readLine.trim();
             	} else if (count == 1) {
-            		algoritmo = readLine.trim();
+					Algoritmo.algoritmo = readLine.trim();
             	} else if (count == 2) {
                 	tamPag = Integer.valueOf(readLine.trim());
             	} else if (count == 3) {
