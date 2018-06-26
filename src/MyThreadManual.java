@@ -13,7 +13,7 @@ public class MyThreadManual extends MyThread{
     }
 
     public void run() {
-    	GerenteDeMemoria.alocarProcesso(this, this.getTamanho());
+    	GerenteDeMemoria.alocarProcesso(this, this.getTamanho(), false);
     	
     	for (String acao : acoes) {
 			realizaAcao(acao);
@@ -29,7 +29,7 @@ public class MyThreadManual extends MyThread{
 				GerenteDeMemoria.acessarEndereco(this, Integer.valueOf(actionContent[2].trim()));
 				break;
 			case "M":
-				GerenteDeMemoria.alocarProcesso(this, Integer.valueOf(actionContent[2].trim()));
+				GerenteDeMemoria.alocarProcesso(this, Integer.valueOf(actionContent[2].trim()),false);
 				break;
 			case "T":
 				System.out.println("Terminou o processo " + this.getName());

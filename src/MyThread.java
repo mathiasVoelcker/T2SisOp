@@ -31,7 +31,7 @@ public class MyThread extends Thread{
         Random gerador = new Random();
         int s = gerador.nextInt(100);
         int n = 0;
-        GerenteDeMemoria.alocarProcesso(this, this.tamanho);
+        GerenteDeMemoria.alocarProcesso(this, this.tamanho, false);
         System.out.println("C " + this.nome + " " + this.tamanho);
         List<Pagina> paginas = Paginas.getPaginas();
         while(n != 2) {
@@ -51,7 +51,7 @@ public class MyThread extends Thread{
                 int tamanhoNovaMemoria = ThreadLocalRandom.current().nextInt(5, 10);
                 System.out.println("M " + this.nome + " " + tamanhoNovaMemoria);
                 System.out.println("tentar alocar mais " + tamanhoNovaMemoria + " a " + this.nome);
-                GerenteDeMemoria.alocarProcesso(this, tamanhoNovaMemoria);
+                GerenteDeMemoria.alocarProcesso(this, tamanhoNovaMemoria, false);
                 if(s/5 < 1) n = 2;
                 else n = ThreadLocalRandom.current().nextInt(0, s/5);
             } else break;

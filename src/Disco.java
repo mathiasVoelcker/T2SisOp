@@ -27,4 +27,14 @@ public class Disco {
         return paginas.get(index);
     }
 
+    public static int numPaginasVazias() {
+        int num = 0;
+        for (Pagina pagina: paginas) {
+            if (pagina.getEnderecos().stream().allMatch(e -> e.getProcessoAlocado() == null)) {
+                num++;
+            }
+        }
+        return num;
+    }
+
 }

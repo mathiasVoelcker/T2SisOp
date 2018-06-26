@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class GerenteDeMemoria {
 
-    public static synchronized void alocarProcesso(MyThread processo, int tamanhoAlocacao) {
+    public static synchronized void alocarProcesso(MyThread processo, int tamanhoAlocacao, boolean imprimirInfo) {
         int quantidadeJaAlocada = 0;
         List<Integer> paginasASerAlocadas = new ArrayList<Integer>();
         // para cada página
@@ -27,6 +27,9 @@ public class GerenteDeMemoria {
                     if (tamanhoAlocacao == quantidadeJaAlocada) {
                         paginasASerAlocadas = paginasASerAlocadas.stream().distinct().collect(Collectors.toList());
                         adicionarProcessoAEnderecos(paginasASerAlocadas, tamanhoAlocacao, processo);
+                        if(imprimirInfo) {
+                            imprimirInfo();
+                        }
                         return;
                     }
 
@@ -35,8 +38,33 @@ public class GerenteDeMemoria {
         }
         System.out.println("Neste momento acontece o page fault");
         int numPaginas = tamanhoAlocacao/(Paginas.getPagina(0).getTamanho() + 1) + 1;
-        trocarProcessosMemoriaLRU(numPaginas);
-        alocarProcesso(processo, tamanhoAlocacao);
+        if(Disco.numPaginasVazias() < numPaginas) {
+            System.out.println("Não há mais espaco na memória");
+        } else {
+            trocarProcessosMemoriaLRU(numPaginas);
+            alocarProcesso(processo, tamanhoAlocacao, true);
+        }
+    }
+
+    private static void imprimirInfo() {
+        System.out.println("Páginas Memória");
+        for (Pagina pagina: Paginas.getPaginas()) {
+            MyThread processo = pagina.getEnderecos().get(0).getProcessoAlocado();
+            if( processo != null)
+                System.out.print(" - " + processo.getNome());
+            else
+                System.out.print(" 0 ");
+        }
+        System.out.println("");
+        System.out.println("Páginas Disco");
+        for (Pagina pagina: Disco.getPaginas()) {
+            MyThread processo = pagina.getEnderecos().get(0).getProcessoAlocado();
+            if( processo != null)
+                System.out.print(" - " + processo.getNome());
+            else
+                System.out.print(" - ");
+        }
+        System.out.println("");
     }
 
     private synchronized static void trocarProcessosMemoriaLRU(int numPaginas) {
@@ -102,9 +130,38 @@ public class GerenteDeMemoria {
                                     && e.getProcessoAlocado() != null
                                     && e.getProcessoAlocado().getNome().equals(processo.getNome()))).collect(Collectors.toList());
             OrdemExecucao.aumentarOrdemExecucao();
-            paginas.get(0).setOrdemExecucao(OrdemExecucao.ordemExecucao);
-            System.out.println("Acessar o endereco " + enderecoProcesso + " do " + processo.getNome() + " - página " + paginas.get(0).getNumero());
+            if(paginas.size() == 0) {
+                System.out.println("Page fault de acesso - processo " + processo.getNome() + " endereco " + enderecoProcesso);
+                buscarPaginaEmDisco(processo, enderecoProcesso);
+            } else {
+                paginas.get(0).setOrdemExecucao(OrdemExecucao.ordemExecucao);
+                System.out.println("Acessar o endereco " + enderecoProcesso + " do " + processo.getNome() + " - página " + paginas.get(0).getNumero());
+            }
         }
+    }
+
+    private static void buscarPaginaEmDisco(MyThread processo, int enderecoProcesso) {
+        //encontrar pagina que possui o enderecoDoProcesso e o processo desejado
+        List<Pagina> paginas = Disco.getPaginas();
+        paginas = Disco.getPaginas()
+                .stream()
+                .filter(p -> p.getEnderecos()
+                        .stream()
+                        .anyMatch(e -> e.getEnderecoDoProcesso() == enderecoProcesso
+                                && e.getProcessoAlocado() != null
+                                && e.getProcessoAlocado().getNome().equals(processo.getNome()))).collect(Collectors.toList());
+        OrdemExecucao.aumentarOrdemExecucao();
+        if(paginas.size() == 0)
+            System.out.println("Processo Não Encontrado");
+        else {
+            trocarProcessosMemoriaLRU(1);
+            int tamanhoAlocacao = paginas.get(0).getEnderecos()
+                    .stream()
+                    .filter(e -> e.getProcessoAlocado() != null)
+                    .toArray().length;
+            alocarProcesso(processo, tamanhoAlocacao, true);
+        }
+
     }
 
     public static synchronized void alocarPaginaADisco(Pagina paginaMemoria) {

@@ -18,9 +18,10 @@ public class main {
     	
     	System.out.println("Modo de execuução:");
 //    	String modo = in.nextLine();
+
     	arquivo("e0");
     	//aleatorio();
-    	
+
     	/*
     	switch(modo.toUpperCase()) {
     		case "ALEATORIO":
