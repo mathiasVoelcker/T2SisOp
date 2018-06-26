@@ -8,15 +8,18 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.w3c.dom.NamedNodeMap;
+
 public class main {
 
     public static void main(String[] args) {
-
+    	
      	Scanner in = new Scanner(System.in);
     	
     	System.out.println("Modo de execuução:");
 //    	String modo = in.nextLine();
     	arquivo("e0");
+    	//aleatorio();
     	
     	/*
     	switch(modo.toUpperCase()) {
@@ -37,8 +40,7 @@ public class main {
     }
 
     private static void aleatorio() {
-        OrdemExecucao.ordemExecucao = 0;
-        int TAMANHO_PAGINAS = 8;
+    	int TAMANHO_PAGINAS = 8;
         Paginas.criarPaginas(8, TAMANHO_PAGINAS);
         Disco.criarPaginas(2, TAMANHO_PAGINAS);
         List<Pagina> paginas = Paginas.getPaginas();
@@ -70,10 +72,19 @@ public class main {
             		}
             		
             		String[] lineContent = readLine.split(" ");
-            				
-            		MyThreadManual processo = new MyThreadManual(lineContent[0], lineContent[1], Integer.valueOf(lineContent[2]));
             		
-            		processos.add(processo);
+            		if("C".equalsIgnoreCase(lineContent[0])) {
+            			MyThreadManual processo = new MyThreadManual(lineContent[1], Integer.valueOf(lineContent[2]));
+            			processos.add(processo);
+            		} else {
+            			MyThreadManual processo = procuraThread(lineContent[1], processos);
+            			if(processo != null) {
+            				processo.addAcao(readLine);
+            			} else {
+            				System.err.println("Erro ao procurar processo para a linha: " + readLine);
+            			}
+            		}
+            		
             		
             	} else if (count == 0) {
             		modo = readLine.trim();
@@ -94,6 +105,15 @@ public class main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    private static MyThreadManual procuraThread(String nome, List<MyThreadManual> lista) {
+    	for (MyThreadManual thread : lista) {
+			if(nome.equalsIgnoreCase(thread.getNome())) {
+				return thread;
+			}
+		}
+    	return null;
     }
     
     private static void executarThreads(int n) {
