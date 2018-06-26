@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="dddcf8e8-ef4f-41be-b4cb-c2c6abb7c6ac" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/src/GerenteDeMemoria.java" afterPath="$PROJECT_DIR$/src/GerenteDeMemoria.java" />
-      <change beforePath="$PROJECT_DIR$/src/main.java" afterPath="$PROJECT_DIR$/src/main.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -117,15 +116,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GerenteDeMemoria.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GerenteDeMemoria.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GerenteDeMemoria.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-274">
-              <caret line="175" column="13" lean-forward="true" selection-start-line="175" selection-start-column="13" selection-end-line="175" selection-end-column="13" />
+            <state relative-caret-position="143">
+              <caret line="62" column="44" lean-forward="true" selection-start-line="62" selection-start-column="44" selection-end-line="62" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4793#4802#0" expanded="true" />
-                <element signature="e#9544#9554#0" expanded="true" />
+                <element signature="e#4870#4879#0" expanded="true" />
+                <element signature="e#9621#9631#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -160,10 +159,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="e0.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="e0.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/in/e0.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-163">
+            <state relative-caret-position="-160">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -208,6 +207,8 @@
       <find>acessar</find>
       <find>algoritmo</find>
       <find>Page fault de acesso</find>
+      <find>página</find>
+      <find>Page</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -295,6 +296,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="ToolWindowCoverage.ShowToolbar" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -428,12 +430,12 @@
       <workItem from="1529243355585" duration="18370000" />
       <workItem from="1529520475995" duration="434000" />
       <workItem from="1529537682114" duration="341000" />
-      <workItem from="1529973742209" duration="15122000" />
+      <workItem from="1529973742209" duration="16744000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37439000" />
+    <option name="totallyTimeSpent" value="39061000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -455,7 +457,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38789546" sideWeight="0.32875606" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.48418158" sideWeight="0.4806139" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.56121045" sideWeight="0.4806139" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287483" sideWeight="0.49676898" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -491,12 +493,6 @@
           <line>62</line>
           <properties />
           <option name="timeStamp" value="90" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GerenteDeMemoria.java</url>
-          <line>197</line>
-          <properties />
-          <option name="timeStamp" value="93" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="94" />
@@ -602,8 +598,8 @@
           <caret line="71" column="14" lean-forward="true" selection-start-line="71" selection-start-column="14" selection-end-line="71" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4793#4802#0" expanded="true" />
-            <element signature="e#9544#9554#0" expanded="true" />
+            <element signature="e#4870#4879#0" expanded="true" />
+            <element signature="e#9621#9631#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -746,8 +742,8 @@
           <caret line="54" column="53" lean-forward="true" selection-start-line="54" selection-start-column="53" selection-end-line="54" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4793#4802#0" expanded="true" />
-            <element signature="e#9544#9554#0" expanded="true" />
+            <element signature="e#4870#4879#0" expanded="true" />
+            <element signature="e#9621#9631#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -867,8 +863,8 @@
           <caret line="39" column="88" lean-forward="false" selection-start-line="39" selection-start-column="88" selection-end-line="39" selection-end-column="88" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4793#4802#0" expanded="true" />
-            <element signature="e#9544#9554#0" expanded="true" />
+            <element signature="e#4870#4879#0" expanded="true" />
+            <element signature="e#9621#9631#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1159,18 +1155,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GerenteDeMemoria.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-274">
-          <caret line="175" column="13" lean-forward="true" selection-start-line="175" selection-start-column="13" selection-end-line="175" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4793#4802#0" expanded="true" />
-            <element signature="e#9544#9554#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/MyThreadManual.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-252">
@@ -1206,9 +1190,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/in/e0.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-163">
+        <state relative-caret-position="-160">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GerenteDeMemoria.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="62" column="44" lean-forward="true" selection-start-line="62" selection-start-column="44" selection-end-line="62" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4870#4879#0" expanded="true" />
+            <element signature="e#9621#9631#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

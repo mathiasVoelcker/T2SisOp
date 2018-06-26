@@ -37,7 +37,7 @@ public class GerenteDeMemoria {
                 }
             }
         }
-        System.out.println("Neste momento acontece o page fault");
+        System.out.println("Neste momento acontece o page fault, tentando alocar " + tamanhoAlocacao + " para processo " + processo.getNome());
         int numPaginas = tamanhoAlocacao/(Paginas.getPagina(0).getTamanho() + 1) + 1;
         if(Disco.numPaginasVazias() < numPaginas) {
             System.out.println("Não há mais espaco na memória");
