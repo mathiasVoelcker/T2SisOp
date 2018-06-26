@@ -56,4 +56,12 @@ public class Pagina {
             enderecos.get(i).setEnderecoDoProcesso(0);
         }
     }
+
+    public void atualizarEnderecos(List<Endereco> enderecos) {
+        for (int i = 0; i < enderecos.size(); i++) {
+
+            this.enderecos.get(i).setEnderecoDoProcesso(enderecos.get(i).getEnderecoDoProcesso());
+            this.enderecos.get(i).setProcessoAlocado(enderecos.get(i).getProcessoAlocado());
+        }
+    }
 }

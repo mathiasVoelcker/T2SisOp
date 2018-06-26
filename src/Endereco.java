@@ -20,6 +20,12 @@ public class Endereco {
         this.enderecoFisico = enderecoFisico;
     }
 
+    public Endereco(Endereco endereco) {
+        this.enderecoFisico = endereco.getEnderecoFisico();
+        this.processoAlocado = endereco.getProcessoAlocado();
+        this.enderecoDoProcesso = endereco.getEnderecoDoProcesso();
+    }
+
     public int getEnderecoFisico() {
         return enderecoFisico;
     }

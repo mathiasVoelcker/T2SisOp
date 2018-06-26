@@ -19,8 +19,8 @@ public class main {
     	System.out.println("Modo de execuução:");
 //    	String modo = in.nextLine();
 
-    	arquivo("e0");
-    	//aleatorio();
+//    	arquivo("e0");
+    	aleatorio();
 
     	/*
     	switch(modo.toUpperCase()) {
@@ -41,6 +41,7 @@ public class main {
     }
 
     private static void aleatorio() {
+		Algoritmo.algoritmo = "aleatorio";
     	int TAMANHO_PAGINAS = 8;
         Paginas.criarPaginas(8, TAMANHO_PAGINAS);
         Disco.criarPaginas(2, TAMANHO_PAGINAS);

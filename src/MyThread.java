@@ -45,7 +45,7 @@ public class MyThread extends Thread{
                 --probabilidadeAcesso;
                 ++probabilidadeFinalizar;
                 n = ThreadLocalRandom.current().nextInt(0, s);
-                int enderecoAcessar = ThreadLocalRandom.current().nextInt(0, s);
+                int enderecoAcessar = ThreadLocalRandom.current().nextInt(0, 20);
                 GerenteDeMemoria.acessarEndereco(this, enderecoAcessar);
             } else if (aux < probabilidadeAcesso + probabilidadeAlocacao) {
                 int tamanhoNovaMemoria = ThreadLocalRandom.current().nextInt(5, 10);

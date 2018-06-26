@@ -15,7 +15,7 @@ public class Disco {
                 endereco++;
             }
             paginas.add(new Pagina(i, tamanho, enderecos));
-            enderecos.clear();
+
         }
     }
 

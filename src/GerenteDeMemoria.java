@@ -66,7 +66,7 @@ public class GerenteDeMemoria {
             if( processo != null)
                 System.out.print(" - " + processo.getNome());
             else
-                System.out.print(" - ");
+                System.out.print(" - 0 ");
         }
         System.out.println("");
     }
@@ -91,7 +91,7 @@ public class GerenteDeMemoria {
         List<Pagina> paginas = Paginas.getPaginas();
         for (int i = 0; i < numPaginas; i++) {
             Pagina paginaAleatoria = null;
-            int numPagina = ThreadLocalRandom.current().nextInt(0, Paginas.getQuantidadePaginas() - 1);
+            int numPagina = ThreadLocalRandom.current().nextInt(0, Paginas.getPaginas().size() - 1);
             System.out.println("Sai a página " + numPagina);
             alocarPaginaADisco(Paginas.getPagina(numPagina));
             OrdemExecucao.aumentarOrdemExecucao();
@@ -159,8 +159,7 @@ public class GerenteDeMemoria {
 
     private static void buscarPaginaEmDisco(MyThread processo, int enderecoProcesso) {
         //encontrar pagina que possui o enderecoDoProcesso e o processo desejado
-        List<Pagina> paginas = Disco.getPaginas();
-        paginas = Disco.getPaginas()
+        List<Pagina> paginas = Disco.getPaginas()
                 .stream()
                 .filter(p -> p.getEnderecos()
                         .stream()
@@ -190,7 +189,12 @@ public class GerenteDeMemoria {
                     .stream()
                     .allMatch(e -> e.getProcessoAlocado() == null)) {
 //                    alocar processo nos endereços disponíveis
-                Disco.getPaginas().get(paginaDisco.getNumero()).setEnderecos(paginaMemoria.getEnderecos());
+                List<Endereco> cloneEnderecos = new ArrayList<Endereco>(paginaMemoria.getEnderecos().size());
+                for(int i = 0; i < paginaMemoria.getEnderecos().size(); i++) {
+                    cloneEnderecos.add(new Endereco(paginaMemoria.getEnderecos().get(i)));
+                }
+                Disco.getPaginas().get(paginaDisco.getNumero()).setEnderecos(cloneEnderecos);
+                List<Pagina> paignas = Disco.getPaginas();
                 Paginas.getPagina(paginaMemoria.getNumero()).esvaziar();
                 break;
             }
